@@ -33,7 +33,7 @@ $ composer create-project slim4/gslim-skeleton [my-app]
 
 By default, the API use a MySQL Database.
 
-You should check and edit this configuration in your `.env` file:
+You should check and edit this configuration in your `scr/Config/.env` file:
 
 ```
 APP_URL=http://yourproject.lo/
