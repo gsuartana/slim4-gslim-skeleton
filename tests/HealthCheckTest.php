@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 class HealthCheckTest extends TestCase
 {
 
-    private $url = "http://telegram.alert.service.lo/";
+    private $url = "http://gslim.lo/";
 
 
     /**
