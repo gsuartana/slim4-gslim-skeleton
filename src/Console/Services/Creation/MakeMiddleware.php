@@ -1,0 +1,83 @@
+<?php
+namespace Gslim\Console\Services\Creation;
+
+use Exception;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Gslim\Console\Helpers\MakeHelper;
+
+class MakeMiddleware extends Command
+{
+    /**
+     * set command name
+     *
+     * @var string
+     */
+    protected static $defaultName = 'make:middleware';
+
+    /**
+     * set command description and add argument
+     */
+    protected function configure()
+    {
+        $this->setDescription('Create Middleware')
+            ->addArgument(
+                'classname',
+                InputArgument::REQUIRED,
+                'Path name/class name of the created interface middleware file'
+            );
+    }
+
+    /**
+     * Create controller file
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
+    public function execute(InputInterface $input, OutputInterface $output)
+    {
+        $className = MakeHelper::setClassName($input->getArgument('classname'), "Middleware");
+
+        if(str_contains($className, '/')) {
+            $namespaceTmp = explode("/", $className);
+            $namespace = "Gslim\App\Utils\\".$namespaceTmp[0];
+        }else{
+            $namespace = "Gslim\App\Utils";
+        }
+
+        try {
+            list(
+                $className,
+                $path,
+                $fileName
+                ) = MakeHelper::generateFilePath(
+                        $className,
+                        'src/App' . DIRECTORY_SEPARATOR . 'Middleware'
+                    );
+        } catch (Exception $e) {
+            $output->writeln('<error>' . $e->getMessage() . '</>');
+            return 0;
+        }
+
+
+        $patterns = ['/PregReplace/',  '/Namespaceplaceholder/' ] ;
+        $replacements = [$className, $namespace];
+
+        // Controller
+        $text = file_get_contents(__DIR__.'/Templates/middleware.template.tpl');
+        $generateRs  = file_put_contents(
+            $fileName,
+            preg_replace($patterns, $replacements, $text)
+        );
+
+        if ($generateRs == true) {
+            $output->writeln('<info>File generated</>');
+        } else {
+            $output->writeln('<error>File generation failed</>');
+        }
+        return 0;
+    }
+}

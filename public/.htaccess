@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+     php_flag display_errors On
+     RewriteEngine On
+     RewriteCond %{REQUEST_FILENAME} !-f
+     RewriteCond %{REQUEST_URI} !\.php/
+     RewriteRule ^ index.php/ [QSA,L]
+</IfModule>
+

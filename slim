@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Set Timezone
+ */
+date_default_timezone_set('Europe/Zurich');
+/**
+ * Set path
+ */
+define("ROOT_PATH", __DIR__ . DIRECTORY_SEPARATOR);
+define("SRC_PATH", ROOT_PATH."src".DIRECTORY_SEPARATOR);
+define("APP_PATH",SRC_PATH."App".DIRECTORY_SEPARATOR);
+/**
+ * require autoloac
+ */
+require ROOT_PATH.'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+// set SlimCommand
+use Gslim\Console\SlimCommand;
+$scmd = new SlimCommand();
+//run slim command
+$scmd->run();
+
