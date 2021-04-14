@@ -31,9 +31,9 @@ return static function (ContainerBuilder $containerBuilder)
                 // make sure the path exists and it is writable
                 'cache_dir' =>  'storage/storage',
                 // you should add any other path containing annotated entity classes
-                'metadata_dirs' => ['api/Entity'],
+                'metadata_dirs' => ['App/Entity'],
                 'meta' => [
-                    'entity_path' => [ 'api/Entity' ],
+                    'entity_path' => [ 'App/Entity' ],
                     'auto_generate_proxies' => true,
                     'proxy_dir' => 'storage/cache/proxies',
                     'cache' => null,
