@@ -26,8 +26,6 @@ You can create a new project running the following commands:
 
 ```bash
 $ composer create-project slim4/gslim-skeleton [my-app]
-$ cd [my-app]
-$ composer install
 ```
 
 
