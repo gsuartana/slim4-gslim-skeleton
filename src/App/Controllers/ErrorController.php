@@ -37,7 +37,7 @@ class ErrorController extends BaseController
         );
         // set new objects
         $submit = new AddErrorService();         
-        //create error and send message via telegram
+        //create error
         $errRec = $submit->create($this->getRequestBody);
 
         if(!$errRec['status']) {
